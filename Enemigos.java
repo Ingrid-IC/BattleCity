@@ -1,0 +1,58 @@
+package battlecity;
+
+public class Enemigos {
+    int posX;
+    int posY;
+    int dimX;
+    int dimY;
+    
+    public Enemigos(int posX, int posY, int dimX, int dimY){
+        this.posX = posX;
+        this.posY = posY;
+        this.dimX = dimX;
+        this.dimY = dimY;
+    }
+    
+    public int positionX(){
+        return posX;
+    }
+    public int positionY(){
+        return posY;
+    }
+    
+    public void mover(){
+        int direc = (int) (Math.random()*4 +1);
+        switch (direc) {
+            case 1:
+                moverArriba();
+                break;
+            case 2:
+                moverAbajo();
+                break;
+            case 3:
+                moverDerecha();
+                break;
+            case 4:
+                moverIzquierda();
+                break;
+            default:
+                break;
+        }
+    }
+    public void moverArriba(){
+        posX = posX -1;
+        if(posX == 1) posX = posX +1;
+    }
+    public void moverAbajo(){
+        posX = posX +1;
+        if(posX == dimX-2) posX = posX -1;
+    }
+    public void moverDerecha(){
+        posY = posY+1;
+        if(posY == dimY-2) posY = posY -1;
+    }
+    public void moverIzquierda(){
+        posY = posY -1;
+        if(posY == 1) posY = posY+1;
+    }
+}
