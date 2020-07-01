@@ -15,16 +15,14 @@ public final class BattleCity {
     Enemigos enemigos[] = new Enemigos[cantEnemigos];
     Jugador jugador;
 
-    public BattleCity(int nrclient){
-        this.nrclient = nrclient;
+    public BattleCity(){
+        //this.nrclient = nrclient;
         llenarMapa();
     }
     
     public void run(){
         while(vida){
             //if(vida){
-                //System.out.print("\033[H\033[2J");
-                //System.out.flush();
                 mostrarMapa();
                 //enemigos();
                 moverEnemigos();

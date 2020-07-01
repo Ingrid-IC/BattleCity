@@ -20,7 +20,7 @@ public class TCPServer50 {
     BufferedReader in;
     
     ServerSocket serverSocket;
-    BattleCity bc = new BattleCity(nrcli);
+    //BattleCity bc = new BattleCity(nrcli);
 
     //el constructor pide una interface OnMessageReceived
     public TCPServer50(OnMessageReceived messageListener) {
@@ -57,8 +57,8 @@ public class TCPServer50 {
                 Thread t = new Thread(sendclis[nrcli]);
                 t.start();
                 System.out.println("Nuevo conectado:"+ nrcli+" jugadores conectados");
-                bc.nrclient++;
-                bc.run();
+                //bc.nrclient++;
+                //bc.run();
             }
             
         }catch( Exception e){
