@@ -20,7 +20,7 @@ class Cliente50{
 
                 @Override
                 public void run() {
-                    mTcpClient = new TCPClient50("192.168.0.105",
+                    mTcpClient = new TCPClient50("192.168.0.106",
                         new TCPClient50.OnMessageReceived(){
                             @Override
                             public void messageReceived(String message){
