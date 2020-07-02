@@ -41,13 +41,9 @@ public class Servidor50 {
                 bc = new BattleCity();
                 bc.nuevoJugador();
                 bc.run();
-                //System.out.println("Does it work?");
-                //Thread.sleep(1000);
-                
-                //System.out.println("Nope, it doesnt...again.");
             }
         };
-        battlecity.sleep(20000);
+        battlecity.sleep(15000);
         battlecity.start();
         //-----------------
         String salir = "n";
@@ -68,7 +64,7 @@ public class Servidor50 {
         if(llego.contentEquals("d")) bc.instruccion("derecha");
         if(llego.contentEquals("ss")) bc.instruccion("abajo");
         //bc.run();
-        System.out.println("SERVIDOR40 El mensaje:" + llego);
+        //System.out.println("SERVIDOR40 El mensaje:" + llego);
         /*if(llego.contains("juego")){
             cantJugadores = mTcpServer.nrcli;
             jugadores[cantJugadores] = new Jugador();

@@ -32,22 +32,22 @@ public class Jugador {
     
     public void moverArriba(){
         posX = posX-1;
-        if(posX == 1) posX++;
+        if(posX == 2) posX++;
         direccion = "arriba";
     }
     public void moverAbajo(){
         posX = posX+1;
-        if(posX == dimX-2) posX--;
+        if(posX == dimX-3) posX--;
         direccion = "abajo";
     }
     public void moverDerecha(){
         posY = posY+1;
-        if(posY == dimY-2) posY--;
+        if(posY == dimY-4) posY--;
         direccion = "derecha";
     }
     public void moverIzquierda(){
         posY = posY-1;
-        if(posY == 1) posY++;
+        if(posY == 3) posY++;
         direccion = "izquierda";
     }
 }

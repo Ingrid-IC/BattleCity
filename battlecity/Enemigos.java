@@ -41,18 +41,18 @@ public class Enemigos {
     }
     public void moverArriba(){
         posX = posX -1;
-        if(posX == 1) posX = posX +1;
+        if(posX == 2) posX = posX +1;
     }
     public void moverAbajo(){
         posX = posX +1;
-        if(posX == dimX-2) posX = posX -1;
+        if(posX == dimX-3) posX = posX-1;
     }
     public void moverDerecha(){
         posY = posY+1;
-        if(posY == dimY-2) posY = posY -1;
+        if(posY == dimY-4) posY = posY-1;
     }
     public void moverIzquierda(){
         posY = posY -1;
-        if(posY == 1) posY = posY+1;
+        if(posY == 3) posY = posY+1;
     }
 }
