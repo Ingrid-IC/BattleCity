@@ -75,5 +75,11 @@ public class TCPServerThread50 extends Thread{
             mOut.flush();
         }
     }
-    
+
+    public void sendMap(char[][] map){//funcion de trabajo
+        if (mOut != null && !mOut.checkError()) {
+            mOut.println( map);
+            mOut.flush();
+        }
+    }
 }

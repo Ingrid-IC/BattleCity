@@ -57,5 +57,6 @@ public class TCPClient50 {
     }
     public interface OnMessageReceived {
         public void messageReceived(String message);
+        //public void mapReceived(char[][] map);
     }
 }

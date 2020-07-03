@@ -26,6 +26,9 @@ public final class BattleCity {
 		//this.nrclient = nrclient;
 		llenarMapa();
 	}
+	public boolean Vida(){
+		return vida;
+	}
 	
 	public void run(){
 		while(vida){
@@ -44,6 +47,16 @@ public final class BattleCity {
 			//}else System.out.println("=======Perdiste=======");
 		}
 		System.out.println("=======Perdiste=======");
+	}
+
+	public String mapa(){
+		String nuevoMapa = "";
+		for(int i=0;i<dimX;i++){
+			for(int j=0;j<dimY;j++){
+				nuevoMapa += mapa[i][j];
+			}
+		}
+		return nuevoMapa;
 	}
 	
 	public void llenarMapa(){
@@ -74,10 +87,11 @@ public final class BattleCity {
 	public void mostrarMapa(){
 		for(int i=0;i<dimX;i++){
 			for(int j=0;j<dimY;j++)
-				if(mapa[i][j] == muro) System.out.print(ANSI_RED+mapa[i][j]+ANSI_RESET);
-				else  if((mapa[i][j] == 'o') || (mapa[i][j] == '+')) System.out.print(ANSI_WHITE+mapa[i][j]+ANSI_RESET);
-				else  if((mapa[i][j] == 'O') || (mapa[i][j] == '*')) System.out.print(ANSI_BLUE+mapa[i][j]+ANSI_RESET);
-				else System.out.print(mapa[i][j]);
+				//if(mapa[i][j] == muro) System.out.print(ANSI_RED+mapa[i][j]+ANSI_RESET);
+				//else  if((mapa[i][j] == 'o') || (mapa[i][j] == '+')) System.out.print(ANSI_WHITE+mapa[i][j]+ANSI_RESET);
+				//else  if((mapa[i][j] == 'O') || (mapa[i][j] == '*')) System.out.print(ANSI_BLUE+mapa[i][j]+ANSI_RESET);
+				//else 
+				System.out.print(mapa[i][j]);
 			System.out.print("\n");
 		}
 	}

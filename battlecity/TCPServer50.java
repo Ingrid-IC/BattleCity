@@ -28,9 +28,6 @@ public class TCPServer50 {
     }
     
     public OnMessageReceived getMessageListener(){
-        
-        //bc.instruccion(message);
-        //bc.run();
         return this.messageListener;
     }
     
@@ -40,6 +37,13 @@ public class TCPServer50 {
             System.out.println("ENVIANDO A JUGADOR " + (i));
         }
     }
+
+    /*public void sendMapTCPServer(char[][] map){
+        for (int i = 1; i <= nrcli; i++) {
+            sendclis[i].sendMap(map);
+            System.out.println("ENVIANDO A JUGADOR " + (i));
+        }
+    }*/
     
     
     public void run(){

@@ -6,9 +6,10 @@ import battlecity.TCPClient50;
 class Cliente50{
     TCPClient50 mTcpClient;
     Scanner sc;
-    String indication = "tarea";
-    String sumatoria = "suma";
     double rpta;
+    int dimX = 35;
+    int dimY = 80;
+
     
     public static void main(String[] args)  {
         Cliente50 objcli = new Cliente50();
@@ -44,16 +45,27 @@ class Cliente50{
         System.out.println("Cliente bandera 02");
     
     }
+
     void ClienteRecibe(String llego){
-        System.out.println("CLINTE50 El mensaje::" + llego);
-    }
-    void ClienteEnvia(String envia){
-        if (mTcpClient != null) {
-            //if(envia.contains("juego")){
-            //    Jugador jugador = new Jugador();
-            //}
-            mTcpClient.sendMessage(envia);
+        //System.out.println("CLINTE50 El mensaje::" + llego);
+        if(llego != null){
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            imprimirMapa(llego);
         }
     }
 
+    void ClienteEnvia(String envia){
+        if (mTcpClient != null)
+            mTcpClient.sendMessage(envia);
+    }
+
+    void imprimirMapa(String mapa){
+        for (int x=0; x<mapa.length(); x=x+80){
+            for(int i=x; i<dimY+x; i++){
+                System.out.print(mapa.charAt(i));
+            }
+            System.out.print("\n");
+        }
+    }
 }
