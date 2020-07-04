@@ -1,17 +1,19 @@
 package battlecity;
 
 public class Jugador {
-	int posX;
-	int posY;
-	int dimX;
-	int dimY;
+	int id;
+	int posX = 3;
+	int posY = 4;
+	int dimX = 35;
+	int dimY = 80;
 	String direccion = "derecha";
 	
-	public Jugador(int posX, int posY, int dimX, int dimY){
-		this.posX = posX;
-		this.posY = posY;
-		this.dimX = dimX;
-		this.dimY = dimY;
+	public Jugador(int id){
+		this.id = id;
+		//this.posX = posX;
+		//this.posY = posY;
+		//this.dimX = dimX;
+		//this.dimY = dimY;
 	}
 	
 	public int positionX(){

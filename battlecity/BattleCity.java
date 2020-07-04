@@ -14,13 +14,14 @@ public final class BattleCity {
 	
 	char mapa[][] = new char[dimX][dimY];
 	
-	int posX = 3;
-	int posY = 4;
+	//int posX = 3;
+	//int posY = 4;
 	char muro = (char)177;
 	
 	int cantEnemigos = 8;
 	Enemigos enemigos[] = new Enemigos[cantEnemigos];
-	Jugador jugador;
+	//Jugador jugador;
+	//Jugador jugadores[];
 
 	public BattleCity(){
 		//this.nrclient = nrclient;
@@ -32,19 +33,17 @@ public final class BattleCity {
 	
 	public void run(){
 		while(vida){
-			//if(vida){
-				System.out.print("\033[H\033[2J");
-				System.out.flush();
-				mostrarMapa();
-				moverEnemigos();
-				choqueEnemigos();
-				try{
-					Thread.sleep(1000);
-				} 
-				catch(InterruptedException e){
-					 // this part is executed when an exception (in this example InterruptedException) occurs
-				}
-			//}else System.out.println("=======Perdiste=======");
+			System.out.print("\033[H\033[2J");
+			System.out.flush();
+			mostrarMapa();
+			moverEnemigos();
+			//choqueEnemigos();
+			try{
+				Thread.sleep(1000);
+			} 
+			catch(InterruptedException e){
+				 // this part is executed when an exception (in this example InterruptedException) occurs
+			}
 		}
 		System.out.println("=======Perdiste=======");
 	}
@@ -96,12 +95,13 @@ public final class BattleCity {
 		}
 	}
 	
-	public void nuevoJugador(){
-		jugador = new Jugador(posX,posY,dimX,dimY);
-		ubicarJugador();
-	}
+	/*public void nuevoJugador(int jugadorId){
+		//jugadores[jugadorId] = new Jugador(jugadorId);
+		//jugador = new Jugador(jugadorId,posX,posY,dimX,dimY);
+		ubicarJugador(jugadores[jugadorId]);
+	}*/
 	
-	public void ubicarJugador(){
+	public void ubicarJugador(Jugador jugador){
 		int posJX = jugador.positionX();
 		int posJY = jugador.positionY();
 		String direc = jugador.direccion();
@@ -163,7 +163,7 @@ public final class BattleCity {
 		mapa[posx+1][posy+1] = ' ';
 	}
 	
-	public void instruccion(String inst){
+	public void instruccion(Jugador jugador,String inst){
 		//mapa[posX][posY] = ' ';
 		limpiarPos(jugador.positionX(),jugador.positionY());
 		if("arriba".equals(inst))    jugador.moverArriba();//posX = posX -1;
@@ -171,7 +171,7 @@ public final class BattleCity {
 		if("derecha".equals(inst))   jugador.moverDerecha();//posY = posY+1;
 		if("izquierda".equals(inst)) jugador.moverIzquierda();//posY = posY -1;
 		
-		ubicarJugador();
+		ubicarJugador(jugador);
 		//if(mapa[jugador.positionX()][jugador.positionY()] != 'E') ubicarJugador();
 		//else vida = false;//System.out.println("=======Perdiste=======");
 	}
@@ -200,6 +200,7 @@ public final class BattleCity {
 		}
 	}
 
+/*
 	public void choqueEnemigos(){
 		int posEX;
 		int posEY;
@@ -221,5 +222,5 @@ public final class BattleCity {
 			//	vida = false;
 			//}
 		}
-	}
+	}*/
 }

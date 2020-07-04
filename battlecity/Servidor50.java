@@ -6,8 +6,9 @@ public class Servidor50 {
    TCPServer50 mTcpServer;
    Scanner sc;
    BattleCity bc;
-   Jugador jugadores[];
-   int cantJugadores=0;
+   int cantJugadores = 5;
+   Jugador jugadores[] = new Jugador[cantJugadores];
+   int jugadorId = 0;
    String mapa;
    
    public static void main(String[] args) throws InterruptedException {
@@ -24,7 +25,9 @@ public class Servidor50 {
 						new TCPServer50.OnMessageReceived(){
 							@Override
 							public void messageReceived(String message){
-								ServidorRecibe(message);
+								synchronized(this){
+									ServidorRecibe(message);
+								}
 								//ServidorEnvia(message);
 							}
 						}
@@ -38,11 +41,13 @@ public class Servidor50 {
 			@Override
 			public void run() {
 				bc = new BattleCity();
-				bc.nuevoJugador();
+				jugadores[jugadorId] = new Jugador(jugadorId);
+				bc.ubicarJugador(jugadores[jugadorId]);
+				// bc.nuevoJugador(jugadorId);
 
 				while(bc.Vida()){
 					bc.moverEnemigos();
-					bc.choqueEnemigos();
+					//bc.choqueEnemigos();
 					mapa = bc.mapa();
 					try{
 						Thread.sleep(900);
@@ -70,23 +75,31 @@ public class Servidor50 {
    
 	}
 	void ServidorRecibe(String llego){
-
-		if(llego.contains("juego"))  bc.nuevoJugador();
-		if(llego.contentEquals("w")) bc.instruccion("arriba");
-		if(llego.contentEquals("a")) bc.instruccion("izquierda");
-		if(llego.contentEquals("d")) bc.instruccion("derecha");
-		if(llego.contentEquals("ss")) bc.instruccion("abajo");
-		System.out.println("SERVIDOR40 El mensaje:" + llego);
-		/*if(llego.contains("juego")){
-			cantJugadores = mTcpServer.nrcli;
-			jugadores[cantJugadores] = new Jugador();
-			
-			bc.nuevoJugador(jugadores[mTcpServer.nrcli]);
-		}*/
+		int id;
+		String inst;
+		if(llego!=null){
+			if(llego.contains("juego")){
+				jugadorId++;
+				jugadores[jugadorId] = new Jugador(jugadorId);
+				bc.ubicarJugador(jugadores[jugadorId]);
+				//bc.nuevoJugador(jugadorId);
+			}else{
+				id = Integer.parseInt(llego.substring(0,1));
+				inst = llego.substring(1);
+				if(inst.contentEquals("w")) bc.instruccion(jugadores[id],"arriba");
+				else if(inst.contentEquals("a")) bc.instruccion(jugadores[id],"izquierda");
+				else if(inst.contentEquals("d")) bc.instruccion(jugadores[id],"derecha");
+				else if(inst.contentEquals("ss")) bc.instruccion(jugadores[id],"abajo");
+				else System.out.println("Comando no reconocido");
+			}
+			System.out.println("SERVIDOR40 El mensaje:" + llego);
+		}
+		
    }
+   
 	void ServidorEnvia(String envia){
 		if (mTcpServer != null) {
 			mTcpServer.sendMessageTCPServer(envia);
 		}
-    }
+	}
 }
