@@ -1,12 +1,15 @@
 package battlecity;
 
 public class Jugador {
-	int id;
-	int posX = 3;
-	int posY = 4;
-	int dimX = 35;
-	int dimY = 80;
-	String direccion = "derecha";
+	private int posX = 3;
+	private int posY = 4;
+	private int id;
+	private String direccion = "derecha";
+	private int desplazamiento = 1;
+	boolean vida = true;
+
+	int dimX = Global.dimX;
+	int dimY = Global.dimY;
 	
 	public Jugador(int id){
 		this.id = id;
@@ -26,6 +29,9 @@ public class Jugador {
 	public String direccion(){
 		return direccion;
 	}
+	public char id(){
+		return (char)(id + '0');
+	}
 	
 	public void actUbicacion(int nuevoX, int nuevoY){
 		posX = nuevoX;
@@ -33,23 +39,23 @@ public class Jugador {
 	}
 	
 	public void moverArriba(){
-		posX = posX-1;
-		if(posX == 2) posX++;
+		posX = posX - desplazamiento;
+		if(posX == 2) moverAbajo();
 		direccion = "arriba";
 	}
 	public void moverAbajo(){
-		posX = posX+1;
-		if(posX == dimX-3) posX--;
+		posX = posX + desplazamiento;
+		if(posX == dimX-3) moverAbajo();
 		direccion = "abajo";
 	}
 	public void moverDerecha(){
-		posY = posY+1;
-		if(posY == dimY-4) posY--;
+		posY = posY + desplazamiento;
+		if(posY == dimY-4) moverIzquierda();
 		direccion = "derecha";
 	}
 	public void moverIzquierda(){
-		posY = posY-1;
-		if(posY == 3) posY++;
+		posY = posY - desplazamiento;
+		if(posY == 3) moverDerecha();
 		direccion = "izquierda";
 	}
 }

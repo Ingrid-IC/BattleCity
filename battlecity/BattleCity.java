@@ -2,35 +2,23 @@ package battlecity;
 import java.util.*;
 
 public final class BattleCity {
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_WHITE = "\u001B[37m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_RESET = "\u001B[0m";
-	boolean vida = true;
-	int nrclient;
-	int dimX = 35;
-	int dimY = 80;
+	int dimX = Global.dimX;
+	int dimY = Global.dimY;
+	int cantEnemigos = Global.cantEnemigos;
+	char muro = Global.muro;
 
-	
-	char mapa[][] = new char[dimX][dimY];
-	
-	//int posX = 3;
-	//int posY = 4;
-	char muro = (char)177;
-	
-	int cantEnemigos = 8;
-	Enemigos enemigos[] = new Enemigos[cantEnemigos];
-	//Jugador jugador;
-	//Jugador jugadores[];
+	//private boolean vida = true;
+	private char mapa[][] = new char[dimX][dimY];
+	private Enemigos enemigos[] = new Enemigos[cantEnemigos];
 
 	public BattleCity(){
-		//this.nrclient = nrclient;
 		llenarMapa();
 	}
-	public boolean Vida(){
+
+	/*public boolean Vida(){
 		return vida;
-	}
-	
+	}*/
+	/*
 	public void run(){
 		while(vida){
 			System.out.print("\033[H\033[2J");
@@ -46,7 +34,7 @@ public final class BattleCity {
 			}
 		}
 		System.out.println("=======Perdiste=======");
-	}
+	}*/
 
 	public String mapa(){
 		String nuevoMapa = "";
@@ -58,7 +46,7 @@ public final class BattleCity {
 		return nuevoMapa;
 	}
 	
-	public void llenarMapa(){
+	private void llenarMapa(){
 		for(int i=0;i<dimX;i++){
 			for(int j=0;j<dimY;j++){
 				mapa[i][j] = ' ';
@@ -111,7 +99,7 @@ public final class BattleCity {
 		mapa[posJX-1][posJY+1] = 'o';	//derecha superior
 
 		mapa[posJX][posJY-1] = 'o';		//izquierda
-		mapa[posJX][posJY] =   '+';		//medio
+		mapa[posJX][posJY] =   jugador.id();		//medio
 		mapa[posJX][posJY+1] = 'o';		//derecha
 
 		mapa[posJX+1][posJY-1] = 'o';	//izquierda inferior
@@ -125,7 +113,7 @@ public final class BattleCity {
 		//mapa[posJX][posJY] = 'x';
 	}
 
-	public void ubicarEnemigo(Enemigos enemigo){
+	private void ubicarEnemigo(Enemigos enemigo){
 		int posEX = enemigo.positionX();
 		int posEY = enemigo.positionY();
 		String direc = enemigo.direccion();
@@ -148,7 +136,7 @@ public final class BattleCity {
 		if(direc == "abajo")     mapa[posEX+1][posEY] = '*';		//medio inferior
 	}
 
-	public void limpiarPos(int posx, int posy){
+	private void limpiarPos(int posx, int posy){
 		//mapa[posx][posy] = ' ';
 		mapa[posx-1][posy-1] = ' ';
 		mapa[posx-1][posy] 	 = ' ';
@@ -172,17 +160,15 @@ public final class BattleCity {
 		if("izquierda".equals(inst)) jugador.moverIzquierda();//posY = posY -1;
 		
 		ubicarJugador(jugador);
-		//if(mapa[jugador.positionX()][jugador.positionY()] != 'E') ubicarJugador();
-		//else vida = false;//System.out.println("=======Perdiste=======");
 	}
 
-	public void enemigos(){
+	private void enemigos(){
 		int posEX;
 		int posEY;
 		for (int i=0; i<enemigos.length; i++){
 			posEX = (int) (Math.random()*(dimX-6) +3);
 			posEY = (int) (Math.random()*(dimY-8) +4);
-			enemigos[i] = new Enemigos(posEX,posEY,dimX,dimY);
+			enemigos[i] = new Enemigos(posEX,posEY);
 			//mapa[posEX][posEY] = 'E';
 			ubicarEnemigo(enemigos[i]);
 		}
@@ -200,8 +186,7 @@ public final class BattleCity {
 		}
 	}
 
-/*
-	public void choqueEnemigos(){
+	public void choqueEnemigos(Jugador jugador){
 		int posEX;
 		int posEY;
 		int posJX = jugador.positionX();
@@ -215,12 +200,12 @@ public final class BattleCity {
 			 dist = Math.pow(posJX-posEX,2)+Math.pow(posJY-posEY,2);
 			 dist = Math.sqrt(dist);
 
-			 if(dist < 3) vida = false;
+			 if(dist < 3) jugador.vida = false;
 
 			//if((posEX==posJx) && (posEY==posJy)) {
 			//	mapa[posEX][posEY] = 'E';
 			//	vida = false;
 			//}
 		}
-	}*/
+	}
 }

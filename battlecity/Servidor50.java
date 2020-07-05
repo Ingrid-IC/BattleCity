@@ -10,6 +10,7 @@ public class Servidor50 {
    Jugador jugadores[] = new Jugador[cantJugadores];
    int jugadorId = 0;
    String mapa;
+   boolean vida = true;
    
    public static void main(String[] args) throws InterruptedException {
 	   Servidor50 objser = new Servidor50();
@@ -37,20 +38,28 @@ public class Servidor50 {
 			}
 		).start();
 		
+		try{
+			Thread.sleep(1000);
+			jugadorId = mTcpServer.nrcli;
+		} 
+		catch(InterruptedException e){
+			 // this part is executed when an exception (in this example InterruptedException) occurs
+		
+		}
+		
 		Thread battlecity = new Thread() {
 			@Override
 			public void run() {
 				bc = new BattleCity();
 				jugadores[jugadorId] = new Jugador(jugadorId);
 				bc.ubicarJugador(jugadores[jugadorId]);
-				// bc.nuevoJugador(jugadorId);
 
-				while(bc.Vida()){
+				while(Vida()){
 					bc.moverEnemigos();
-					//bc.choqueEnemigos();
+					for (int i= 0; i <= jugadorId; i++) bc.choqueEnemigos(jugadores[jugadorId]);
 					mapa = bc.mapa();
 					try{
-						Thread.sleep(900);
+						Thread.sleep(800);
 					} 
 					catch(InterruptedException e){
 						 // this part is executed when an exception (in this example InterruptedException) occurs
@@ -59,7 +68,7 @@ public class Servidor50 {
 				}
 			}
 		};
-		battlecity.sleep(12000);
+		//battlecity.sleep(12000);
 		battlecity.start();
 		
 		//-----------------
@@ -67,39 +76,50 @@ public class Servidor50 {
 		String salir = "n";
 		sc = new Scanner(System.in);
 		System.out.println("Servidor bandera 01");
-		while( !salir.equals("s")){
+		while( !salir.equals("q")){
 			salir = sc.nextLine();
-			ServidorEnvia(salir);
+			//ServidorEnvia(salir);
 		}
 		System.out.println("Servidor bandera 02"); 
    
 	}
+
 	void ServidorRecibe(String llego){
 		int id;
 		String inst;
-		if(llego!=null){
-			if(llego.contains("juego")){
-				jugadorId++;
-				jugadores[jugadorId] = new Jugador(jugadorId);
-				bc.ubicarJugador(jugadores[jugadorId]);
-				//bc.nuevoJugador(jugadorId);
-			}else{
+		if(llego.contains("juego")){
+			jugadorId++;
+			jugadores[jugadorId] = new Jugador(jugadorId);
+			bc.ubicarJugador(jugadores[jugadorId]);
+			//bc.nuevoJugador(jugadorId);
+		}else{
+			try{
 				id = Integer.parseInt(llego.substring(0,1));
 				inst = llego.substring(1);
 				if(inst.contentEquals("w")) bc.instruccion(jugadores[id],"arriba");
 				else if(inst.contentEquals("a")) bc.instruccion(jugadores[id],"izquierda");
 				else if(inst.contentEquals("d")) bc.instruccion(jugadores[id],"derecha");
-				else if(inst.contentEquals("ss")) bc.instruccion(jugadores[id],"abajo");
+				else if(inst.contentEquals("s")) bc.instruccion(jugadores[id],"abajo");
 				else System.out.println("Comando no reconocido");
 			}
-			System.out.println("SERVIDOR40 El mensaje:" + llego);
+			catch(NumberFormatException e){
+				// bla
+			}
 		}
-		
+		System.out.println("SERVIDOR40 El mensaje:" + llego);
    }
    
 	void ServidorEnvia(String envia){
 		if (mTcpServer != null) {
 			mTcpServer.sendMessageTCPServer(envia);
 		}
+	}
+
+	boolean Vida(){
+		int count = 0;
+		for(int i = 0; i<= jugadorId; i++)
+			if(jugadores[i].vida == true) count++;
+		if(count == 0) vida = false;
+		return vida;
 	}
 }

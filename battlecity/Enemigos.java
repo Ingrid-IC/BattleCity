@@ -3,15 +3,16 @@ package battlecity;
 public class Enemigos {
 	int posX;
 	int posY;
-	int dimX;
-	int dimY;
+	int dimX = Global.dimX;
+	int dimY = Global.dimY;
 	String direccion = "arriba";
+	private int desplazamiento = 1;
 	
-	public Enemigos(int posX, int posY, int dimX, int dimY){
+	public Enemigos(int posX, int posY){
 		this.posX = posX;
 		this.posY = posY;
-		this.dimX = dimX;
-		this.dimY = dimY;
+		//this.dimX = dimX;
+		//this.dimY = dimY;
 	}
 	
 	public int positionX(){
@@ -44,23 +45,23 @@ public class Enemigos {
 		}
 	}
 	public void moverArriba(){
-		posX = posX -1;
-		if(posX == 2) posX = posX +1;
+		posX = posX - desplazamiento;
+		if(posX == 2) moverAbajo();
 		direccion = "arriba";
 	}
 	public void moverAbajo(){
-		posX = posX +1;
-		if(posX == dimX-3) posX = posX-1;
+		posX = posX + desplazamiento;
+		if(posX == dimX-3) moverArriba();
 		direccion = "abajo";
 	}
 	public void moverDerecha(){
-		posY = posY+1;
-		if(posY == dimY-4) posY = posY-1;
+		posY = posY + desplazamiento;
+		if(posY == dimY-4) moverIzquierda();
 		direccion = "derecha";
 	}
 	public void moverIzquierda(){
-		posY = posY -1;
-		if(posY == 3) posY = posY+1;
+		posY = posY - desplazamiento;
+		if(posY == 3) moverDerecha();
 		direccion = "izquierda";
 	}
 }
