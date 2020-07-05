@@ -6,6 +6,7 @@ public final class BattleCity {
 	int dimY = Global.dimY;
 	int cantEnemigos = Global.cantEnemigos;
 	char muro = Global.muro;
+	char bloque = Global.bloque;
 
 	//private boolean vida = true;
 	private char mapa[][] = new char[dimX][dimY];
@@ -66,6 +67,26 @@ public final class BattleCity {
 				mapa[dimX-2][j] = muro;
 				
 				mapa[dimX-1][dimY-1] = muro;
+
+				if((i >= dimX/4) && (i <= 3*dimX/4) && (j == dimY/4)){
+					mapa[i][j-2] = bloque;
+					mapa[i][j-1] = bloque;
+					mapa[i][j] = bloque;
+				}
+				if((i >= dimX/4) && (i <= 3*dimX/4) && (j == dimY/2)){
+					mapa[i][j-2] = bloque;
+					mapa[i][j-1] = bloque;
+					mapa[i][j] = bloque;
+				}
+				if((i >= dimX/4) && (i <= 3*dimX/4) && (j == 3*dimY/4)){
+					mapa[i][j-2] = bloque;
+					mapa[i][j-1] = bloque;
+					mapa[i][j] = bloque;
+				} 
+				if((i == dimX/2) && (j >= dimY/2) && (j <= 3*dimY/4)){
+					mapa[i-1][j] = bloque;
+					mapa[i][j] = bloque;
+				}
 			}
 		}
 		enemigos();
