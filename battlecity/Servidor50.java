@@ -94,7 +94,8 @@ public class Servidor50 {
 		}else{
 			try{
 				id = Integer.parseInt(llego.substring(0,1));
-				if(jugadores[id].vida == false) System.out.println(Global.ANSI_RED+"Jugador " + id + " sin vida"+Global.ANSI_RESET);
+				if(jugadores[id].vida == false) 
+					System.out.println(Global.ANSI_RED+"Jugador " + id + " sin vida"+Global.ANSI_RESET);
 				else{
 					inst = llego.substring(1);
 					if(inst.contentEquals("w")) bc.instruccion(jugadores[id],"arriba");
