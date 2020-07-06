@@ -1,5 +1,10 @@
 package battlecity;
+
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public final class BattleCity {
 	int dimX = Global.dimX;
@@ -230,4 +235,5 @@ public final class BattleCity {
 			 if(dist < 3) jugador.vida = false;
 		}
 	}
+
 }

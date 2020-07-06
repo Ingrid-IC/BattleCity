@@ -12,7 +12,7 @@ public class Servidor50 {
    String mapa;
    boolean vida = true;
    
-   public static void main(String[] args) throws InterruptedException {
+   public static void main(String[] args) throws InterruptedException{
 	   Servidor50 objser = new Servidor50();
 	   objser.iniciar();
    }
