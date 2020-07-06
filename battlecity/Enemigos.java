@@ -129,7 +129,7 @@ public class Enemigos {
 
     public void disparar() {
         if (this.disparo == true) {
-            
+
         } else {
             this.disparo = true;
             if (direccion == "arriba") {
@@ -148,28 +148,26 @@ public class Enemigos {
 
     public void moverDisparo() {
         if (this.disparo == true) {
-            
-            
-            if (this.bala.vX == 0 && this.bala.vY == 1 && this.bala.posX < 2) {//se mueve hacia arriba
-                this.bala.posX = this.bala.posX + 1;
-            } else if (this.bala.vX == 0 && this.bala.vY == -1 && this.bala.posX > dimX-3) {//se mueve hacia abajo
-                this.bala.posX = this.bala.posX - 1;
-            } else if (this.bala.vX == -1 && this.bala.vY == 0 && this.bala.posY > 3) {//se mueve hacia la izquierda
-                this.bala.posY = this.bala.posY - 1;
-            } else if (this.bala.vX == 1 && this.bala.vY == 0 && this.bala.posY < dimY - 4) {//se mueve hacia la derecha
+            if (this.bala.vX == 0 && this.bala.vY == 1 && this.bala.posY < dimY - 4) {//DERECHA
                 this.bala.posY = this.bala.posY + 1;
-            }
-            if(this.bala.posY == 3 || this.bala.posY == dimY - 4){
-                this.disparo = false;
-            }
-            if(this.bala.posX == 2 || this.bala.posX == dimX-3){
-                this.disparo = false;
+            } else if (this.bala.vX == 0 && this.bala.vY == -1 && this.bala.posY > 3) {//IZQUIERDA
+                this.bala.posY = this.bala.posY - 1;
+            } else if (this.bala.vX == -1 && this.bala.vY == 0 && this.bala.posX > 2) {//ARRIBA
+                this.bala.posX = this.bala.posX - 1;
+            } else if (this.bala.vX == 1 && this.bala.vY == 0 && this.bala.posX < dimX - 3) {//ABAJO
+                this.bala.posX = this.bala.posX + 1;
             }
             
-            
+            if (this.bala.posY == dimY - 4 || this.bala.posY ==  3) {
+                this.disparo = false;
+            }
+            if (this.bala.posX == 2 || this.bala.posX == dimX - 3) {
+                this.disparo = false;
+            }
         }
     }
     public void eliminarEnemigo(){
        this.vida = false;
+    
     }
 }
