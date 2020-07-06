@@ -56,7 +56,7 @@ public class Servidor50 {
 
 				while(Vida()){
 					bc.moverEnemigos();
-					for (int i= 0; i <= jugadorId; i++) bc.choqueEnemigos(jugadores[jugadorId]);
+					vidaJugadores(); //cambio
 					mapa = bc.mapa();
 					try{
 						Thread.sleep(800);
@@ -91,19 +91,21 @@ public class Servidor50 {
 			jugadorId++;
 			jugadores[jugadorId] = new Jugador(jugadorId);
 			bc.ubicarJugador(jugadores[jugadorId]);
-			//bc.nuevoJugador(jugadorId);
 		}else{
 			try{
 				id = Integer.parseInt(llego.substring(0,1));
-				inst = llego.substring(1);
-				if(inst.contentEquals("w")) bc.instruccion(jugadores[id],"arriba");
-				else if(inst.contentEquals("a")) bc.instruccion(jugadores[id],"izquierda");
-				else if(inst.contentEquals("d")) bc.instruccion(jugadores[id],"derecha");
-				else if(inst.contentEquals("s")) bc.instruccion(jugadores[id],"abajo");
-				else System.out.println("Comando no reconocido");
+				if(jugadores[id].vida == false) System.out.println(Global.ANSI_RED+"Jugador " + id + " sin vida"+Global.ANSI_RESET);
+				else{
+					inst = llego.substring(1);
+					if(inst.contentEquals("w")) bc.instruccion(jugadores[id],"arriba");
+					else if(inst.contentEquals("a")) bc.instruccion(jugadores[id],"izquierda");
+					else if(inst.contentEquals("d")) bc.instruccion(jugadores[id],"derecha");
+					else if(inst.contentEquals("s")) bc.instruccion(jugadores[id],"abajo");
+					else System.out.println("Comando no reconocido");
+				}
 			}
 			catch(NumberFormatException e){
-				// bla
+				//
 			}
 		}
 		System.out.println("SERVIDOR40 El mensaje:" + llego);
@@ -119,7 +121,13 @@ public class Servidor50 {
 		int count = 0;
 		for(int i = 0; i<= jugadorId; i++)
 			if(jugadores[i].vida == true) count++;
+			else bc.eliminarJugador(jugadores[i]);
 		if(count == 0) vida = false;
 		return vida;
+	}
+	//cambio
+	void vidaJugadores(){
+		for (int i= 0; i <= jugadorId; i++)
+			bc.choqueEnemigos(jugadores[jugadorId]);
 	}
 }

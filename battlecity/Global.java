@@ -3,7 +3,7 @@ package battlecity;
 public class Global{
 	public static int dimX = 44;
     public static int dimY = 88;
-    public static int cantEnemigos = 8;
+    public static int cantEnemigos = 5;
     public static char muro = (char)177;
     public static char bloque = (char)177;
     public static final String ANSI_RESET = "\u001B[0m";

@@ -104,11 +104,6 @@ public final class BattleCity {
 		}
 	}
 	
-	/*public void nuevoJugador(int jugadorId){
-		//jugadores[jugadorId] = new Jugador(jugadorId);
-		//jugador = new Jugador(jugadorId,posX,posY,dimX,dimY);
-		ubicarJugador(jugadores[jugadorId]);
-	}*/
 	
 	public void ubicarJugador(Jugador jugador){
 		int posJX = jugador.positionX();
@@ -171,6 +166,12 @@ public final class BattleCity {
 		mapa[posx+1][posy]   = ' ';
 		mapa[posx+1][posy+1] = ' ';
 	}
+
+	public void eliminarJugador(Jugador jugador){
+		int posJX = jugador.positionX();
+		int posJY = jugador.positionY();
+		limpiarPos(posJX, posJY);
+	}
 	
 	public void instruccion(Jugador jugador,String inst){
 		//mapa[posX][posY] = ' ';
@@ -186,12 +187,19 @@ public final class BattleCity {
 	private void enemigos(){
 		int posEX;
 		int posEY;
+
 		for (int i=0; i<enemigos.length; i++){
 			posEX = (int) (Math.random()*(dimX-6) +3);
 			posEY = (int) (Math.random()*(dimY-8) +4);
-			enemigos[i] = new Enemigos(posEX,posEY);
-			//mapa[posEX][posEY] = 'E';
-			ubicarEnemigo(enemigos[i]);
+			if(mapa[posEX][posEY] == muro || 
+				mapa[posEX-1][posEY-1] == muro || 
+				mapa[posEX-1][posEY+1] == muro ||
+				mapa[posEX+1][posEY+1] == muro || 
+				mapa[posEX+1][posEY-1] == muro) i--;
+			else{
+				enemigos[i] = new Enemigos(posEX,posEY);
+				ubicarEnemigo(enemigos[i]);
+			}
 		}
 	}
 	
@@ -201,8 +209,6 @@ public final class BattleCity {
 		for(int p=0; p<cantEnemigos; p++){
 			limpiarPos(enemigos[p].positionX(),enemigos[p].positionY());
 			enemigos[p].mover();
-			//nuevPosX = enemigos[p].positionX();
-			//nuevPosY = enemigos[p].positionY();
 			ubicarEnemigo(enemigos[p]);
 		}
 	}
@@ -222,11 +228,6 @@ public final class BattleCity {
 			 dist = Math.sqrt(dist);
 
 			 if(dist < 3) jugador.vida = false;
-
-			//if((posEX==posJx) && (posEY==posJy)) {
-			//	mapa[posEX][posEY] = 'E';
-			//	vida = false;
-			//}
 		}
 	}
 }
