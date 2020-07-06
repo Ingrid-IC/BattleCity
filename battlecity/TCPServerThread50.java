@@ -50,7 +50,6 @@ public class TCPServerThread50 extends Thread{
                         messageListener.messageReceived(message);
                     }
                     
-
                     message = null;
                 }
                 System.out.println("RESPONSE FROM CLIENT"+ "S: Received Message: '" + message + "'");

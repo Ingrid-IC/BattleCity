@@ -22,7 +22,7 @@ class Cliente50{
 
 				@Override
 				public void run() {
-					mTcpClient = new TCPClient50("192.168.0.106",
+					mTcpClient = new TCPClient50("192.168.1.29",
 						new TCPClient50.OnMessageReceived(){
 							@Override
 							public void messageReceived(String message){
@@ -67,6 +67,8 @@ class Cliente50{
 			for(int i = x; i < dimY + x; i++){
 				caracter = mapa.charAt(i);
 				if(caracter == muro) System.out.print(Global.ANSI_RED + caracter + Global.ANSI_RESET);
+                                else if(caracter == Global.balaascii) System.out.print(Global.ANSI_PURPLE+ caracter +Global.ANSI_RESET);
+                                else if(caracter == 'o' || caracter == '+') System.out.print(Global.ANSI_GREEN+ caracter +Global.ANSI_RESET);
 				else if(caracter == 'o' || caracter == '+') System.out.print(Global.ANSI_GREEN+ caracter +Global.ANSI_RESET);
 				else if((int)caracter>=48 && (int)caracter <= 57) System.out.print(Global.ANSI_GREEN+ caracter +Global.ANSI_RESET);
 				else if(caracter == 'O' || caracter == '*') System.out.print(Global.ANSI_BLUE+ caracter+Global.ANSI_RESET);
@@ -75,5 +77,4 @@ class Cliente50{
 			System.out.print("\n");
 		}
 	}
-
 }

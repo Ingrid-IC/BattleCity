@@ -185,16 +185,16 @@ public final class BattleCity {
         int vx = enemigo.bala.vX;
         int vy = enemigo.bala.vY;
         if (vx == 0 && vy == 1) {
-            mapa[posDisparoX][posDisparoY] = '>';		//derecha
+            mapa[posDisparoX][posDisparoY] = (char)Global.balaascii;		//derecha
         }
         if (vx == -1 && vy == 0) {
-            mapa[posDisparoX][posDisparoY] = '^';		//arriba
+            mapa[posDisparoX][posDisparoY] = (char)Global.balaascii;		//arriba
         }
         if (vx == 0 && vy == -1) {
-            mapa[posDisparoX][posDisparoY] = '<';		//izquierda
+            mapa[posDisparoX][posDisparoY] = (char)Global.balaascii;		//izquierda
         }
         if (vx == 1 && vy == 0) {
-            mapa[posDisparoX][posDisparoY] = 'v';		//abajo
+            mapa[posDisparoX][posDisparoY] = (char)Global.balaascii;		//abajo
         }
 
     }
@@ -246,7 +246,7 @@ public final class BattleCity {
             jugador.moverIzquierda();//posY = posY -1;
         }
         if ("disparar".equals(inst)) {
-            jugador.disparo = true;
+            jugador.disparar();   
         }
         ubicarJugador(jugador);
     }
@@ -321,10 +321,11 @@ public final class BattleCity {
     
     public void moverBalasJugadores(Jugador jugador) {
         if (jugador.disparo == true) {
-            limpiarPosBala(jugador.positionX(), jugador.positionY());
-            jugador.disparar();
+            
+            limpiarPosBala(jugador.bala.posX, jugador.bala.posY);
+            //jugador.disparar();
+            
             jugador.moverDisparo();
-
             ubicarDisparoJugador(jugador);
         }
 

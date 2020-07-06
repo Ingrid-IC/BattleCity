@@ -122,13 +122,13 @@ public class Jugador {
 
         } else {
             this.disparo = true;
-            if (direccion == "arriba") {
+            if (direccion == "derecha") {
                 this.bala = new Bala(this.posX, this.posY, 0, 1, true);
-            } else if (direccion == "abajo") {
-                this.bala = new Bala(this.posX, this.posY, 0, -1, true);
             } else if (direccion == "izquierda") {
+                this.bala = new Bala(this.posX, this.posY, 0, -1, true);
+            } else if (direccion == "arriba") {
                 this.bala = new Bala(this.posX, this.posY, -1, 0, true);
-            } else if (direccion == "derecha") {
+            } else if (direccion == "abajo") {
                 this.bala = new Bala(this.posX, this.posY, 1, 0, true);
             }
 
